@@ -2,6 +2,7 @@ name: Weekly generate Node.js 12, 14 and 16 tool cache
 on:
   schedule:
     - cron: '34 1 * * 1'
+  workflow_dispatch:
 
 jobs:
   upload_tool_cache:
