@@ -6,3 +6,4 @@ You can install these cached toolchains in the `RUNNER_DIR/_work/_tool` folder g
 
 [Node](.github/workflows/update-node.yaml)
 [Go](.github/workflows/update-go.yaml)
+[Python](.github/workflows/update-python.yaml)
