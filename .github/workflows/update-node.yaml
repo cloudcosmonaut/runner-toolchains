@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  upload_tool_cache:
+  upload_node_tool_cache:
     runs-on: ubuntu-latest
     steps:
       - name: Clear any existing tool cache
