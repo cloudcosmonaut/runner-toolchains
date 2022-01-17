@@ -1,0 +1,39 @@
+name: Weekly generate DotNet 3.1.x, 5.0.x and 6.0.x tool cache
+on:
+  schedule:
+    - cron: '07 1 * * 1'
+  workflow_dispatch:
+
+jobs:
+  upload_go_tool_cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear any existing tool cache
+        run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
+
+      - name: Setup DotNet 3.1.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+
+      - name: Setup DotNet 5.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+
+      - name: Setup DotNet 6.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Archive tool cache
+        run: |
+          cd "${{ runner.tool_cache }}"
+          tar -czf dotnet_tool_cache.tar.gz *
+
+      - name: Upload tool cache artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: ${{runner.tool_cache}}/dotnet_tool_cache.tar.gz
